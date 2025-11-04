@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="table_creation_wizard" model="ir.ui.view">
+            <field name="name">consent able creation</field>
+            <field name="model">consent.table.creation</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Create Table">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="field_description"/>
+                        </group>
+                        <label for="info" />
+                        <field name="info"/>
+                    </group>
+                    <footer>
+                        <button name="create_table_wizard" string="Create fields" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_table_creation" model="ir.actions.act_window">
+                <field name="name">Table Fields</field>
+                <field name="res_model">consent.table.creation</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="table_creation_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <record id="hcare_action_model_model" model="ir.actions.act_window">
+                <field name="name">Models</field>
+                <field name="res_model">ir.model</field>
+                <field name="view_mode">tree,form</field>
+                <field name="domain">[('consent_table', '=', True)]</field>
+        </record>
+
+        <menuitem id="submenu2_consent_field" name="Table" parent="menu_consent_field" sequence="2" groups="pragtech_dental_management.group_dental_mng_menu,base.group_system"/>
+
+        <menuitem id="menu_table_creation" name="Create Table" action="action_table_creation" parent="submenu2_consent_field" sequence="1"/>
+
+        <menuitem id="menu_table" name="Tables" action="hcare_action_model_model" parent="submenu2_consent_field" sequence="2"/>
+    </data>
+</odoo>

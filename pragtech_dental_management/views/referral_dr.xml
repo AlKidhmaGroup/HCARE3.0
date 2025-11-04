@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="referral_dr_view">
+		<field name="name">Referral Doctor</field>
+		<field name="model">referral.dr</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+            <form string="Referral Doctor">
+				<sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="clinic"/>
+                        </group>
+						<group/>
+                    </group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="referral_dr_tree">
+		<field name="name">Referral Doctor</field>
+		<field name="model">referral.dr</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string='Referral Doctor'>
+				<field name="name"/>
+				<field name="clinic"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="view_referral_dr_filter" model="ir.ui.view">
+		<field name="name">Referral Doctor</field>
+		<field name="model">referral.dr</field>
+		<field name="type">search</field>
+		<field name="arch" type="xml">
+			<search string="Search Referral Doctor">
+				<field name="name" />
+				<field name="clinic" />
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="medical_action_referral_dr">
+		<field name="name">Referral Doctor</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">referral.dr</field>
+		<field name="view_type">form</field>
+		<field name="view_id" ref="referral_dr_tree" />
+	</record>
+    <menuitem name="Referral Doctor" id="medical_conf_referal_dr" action="medical_action_referral_dr"
+			parent="pragtech_dental_management.medical_conf_physicians" sequence="8" />
+</odoo>

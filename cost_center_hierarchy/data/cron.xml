@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="cost_center_update_doctor_values">
+            <field name="name">Update Cost Center in Doctor</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_physician"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="code">model.update_cost_center()</field>
+            <field name="args" eval="'()'"/>
+        </record>
+    </data>
+</odoo>

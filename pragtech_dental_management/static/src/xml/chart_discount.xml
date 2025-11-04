@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="dental_chart_discount.DiscountColumns">
+        <td class="actual_amt_val">
+            <input type="text" class="unit_price" readonly="readonly"
+                   name="unit_price"/>
+        </td>
+        <td class="disc_type_val">
+            <select class="discount_fixed_percent" name="discount_fixed_percent">
+                <option value=""></option>
+                <option value="Fixed">Fixed</option>
+                <option value="Percent">Percent</option>
+            </select>
+        </td>
+        <td class="disc_perc_val">
+            <input type="text" class="discount"
+                   readonly="readonly" name="discount"/>
+        </td>
+        <td class="disc_amt_val">
+            <input type="text" class="discount_value"
+                   readonly="readonly" name="discount_value"/>
+        </td>
+    </t>
+</templates>

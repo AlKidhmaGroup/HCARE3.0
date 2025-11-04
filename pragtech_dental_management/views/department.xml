@@ -1,0 +1,43 @@
+<odoo>
+<data>
+	<record model="ir.ui.view" id="complaint_form_view">
+		<field name="name">Doctor Department</field>
+		<field name="model">complaints.findings.department</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="description"/>
+						<field name="code"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="complaint_tree">
+		<field name="name">Doctor Department</field>
+		<field name="model">complaints.findings.department</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="description" />
+				<field name="code"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_complaints_dr_department">
+		<field name="name">Doctor Department</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">complaints.findings.department</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem action="action_complaints_dr_department" id="Doctor Department"
+		parent="pragtech_dental_management.action_complaints_findings" sequence="1" />
+
+</data>
+</odoo>

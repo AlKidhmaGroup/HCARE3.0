@@ -1,0 +1,257 @@
+.o_face_chart {
+    width: 100%;
+    overflow: auto;
+}
+.o_chart_el {
+    width: 100%;
+    height: 100%;
+/*
+    margin: 0 auto;
+*/
+    display: flex;
+}
+.o_chart_el .left_panel {
+    width: 30%;
+    height: 100%;
+}
+.o_chart_el .image_panel {
+    width: 40%;
+    height: 40%;
+}
+.o_chart_el .right_panel {
+    width: 30%;
+    height: 100%;
+}
+.o_chart_el .image_panel img {
+    width: 100%;
+}
+textarea.description {
+    text-align: left;
+}
+button.remove:hover {
+    color: black;
+}
+div.injection_note input {
+    height: 30px;
+    padding: 5px;
+}
+div.injection_note .user_id {
+    height: 30px;
+}
+div.injection_note .user_id > .select2-choice {
+    border-radius: unset;
+}
+
+/*popup new styles start*/
+table.surface_table {
+    width: 100%;
+}
+
+tr.surface_head th {
+    padding: 5px;
+    border: 1px solid #fff7f7;
+    background-color: #2cbce6a6;
+    background-color: #408c99;
+    color: white;
+}
+
+th.description_col {
+    width: 35%;
+}
+
+th.appt_col {
+    width: 10%;
+}
+tr.line_footer td {
+    padding: 5px;
+}
+tr.line_footer td span {
+    cursor: pointer;
+    color: blue;
+    font-weight: 600;
+}
+tr.surface_data input, tr.surface_data select, tr.surface_data textarea {
+    width: 100%;
+    border: unset;
+}
+tr.surface_data td {
+    border: 1px solid lightgray
+}
+td.col_delete {
+    padding-left: 5px;
+    font-size: 15px;
+}
+.col_delete {
+    cursor: pointer;
+}
+
+/*summary table start*/
+tr.area_header {
+    background-color: #e6e6e6e0;
+    font-weight: 600;
+}
+
+.summary_table td {
+    padding: 5px;
+    border: 1px solid lightgray;
+}
+/*th.s_name {
+    width: 15%;
+}
+
+th.s_date {
+    width: 8%;
+}
+
+th.s_product {
+    width: 15%;
+}
+
+th.s_user {
+    width: 12%;
+}
+
+th.s_appt {
+    width: 7%;
+}
+
+th.s_state {
+    width: 13%;
+}*/
+th.s_note {
+    width: 40%;
+}
+span.mark_as_completed {
+    background-color: #408c99;
+    color: white;
+    padding: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 3px;
+    border: 1px solid #408c99;
+    cursor: pointer;
+    display: block;
+}
+
+/*summary table end*/
+/*chart header start*/
+.o_chart_control {
+    height: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+    padding: 1px;
+    border-radius: 0px 0px 5px 5px;
+    width: 100%;
+}
+.chart_buttons {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: #9ebed7;
+}
+.chart_btn {
+    width: 100px;
+    height: 100%;
+    background-color: #408c99;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    display: table;
+    cursor: pointer;
+    color: white;
+    margin: 0px 1px;
+}
+.chart_btn.go_back {
+    width: 85px;
+}
+.o_chart_mode {
+    width: 135px;
+    background-color: #408c99;
+}
+.chart_btn.active {
+    background-color: #a8c99d;
+    color: #2f2e2e;
+}
+.chart_btn .btn_body {
+    display: table-cell;
+    vertical-align: middle;
+}
+.chart_btn .btn_body i {
+    font-size: 14px;
+}
+/*chart header end*/
+tr.is_initial {
+    background-color: #a8c99ddb;
+}
+
+tr.is_initial td, tr.is_initial input {
+    background: transparent;
+}
+tr.is_initial textarea {
+    background-color: #a8c99ddb;
+}
+
+.injection_note_modal {
+    width: 96%;
+}
+.o_required {
+    background-color: #ccccf185;
+}
+.o_required input, .o_required textarea {
+    background-color: transparent;
+}
+
+/*treatment table header*/
+.summary_ctrl_btn {
+    width: 100%;
+    height: 40px;
+    background-color: #9ebed7;
+    color: white;
+    display: flex;
+    padding: 2px;
+}
+
+.summary_ctrl_btn > div {
+    width: 135px;
+    height: 100%;
+    background-color: #408c99;
+    border-radius: 3px;
+    border: 1px solid #43a4b5;
+    margin-right: 1px;
+    text-align: center;
+    display: table;
+    cursor: pointer;
+    font-weight: 600;
+}
+.summary_ctrl_btn > div > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+/*multi surface table selection start*/
+table.multi_select_table {
+    width: 70%;
+    padding-left: 3px;
+}
+
+table.multi_select_table thead tr {
+    background-color: #408c99;
+    color: white;
+}
+
+.multi_select_table th, .multi_select_table td {
+    padding: 5px;
+    border: 1px solid #408c99;
+}
+.multi_select_table tfoot .add_note_selected {
+    background-color: #408c99c7;
+    color: white;
+    padding: 7px;
+    float: left;
+    border-radius: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.multi_select_table tfoot td {
+    border: 0;
+}
+/*multi surface table selection end*/

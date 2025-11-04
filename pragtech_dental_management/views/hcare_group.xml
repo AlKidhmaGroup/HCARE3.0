@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_group_report_search_inherit">
+            <field name="name">res.groups.search.inherit</field>
+            <field name="model">res.groups</field>
+            <field name="inherit_id" ref="base.view_groups_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name ='name']" position="after">
+                    <filter name="hcare" string="HCARE" domain="['|', ('name','=', 'Admin'), ('name','in', ('Receptionist', 'Doctor', 'Nurse', 'Patient'))]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_res_groups" model="ir.actions.act_window">
+            <field name="name">Groups</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.groups</field>
+            <field name="view_type">form</field>
+            <field name="context">{'search_default_hcare': 1}</field>
+            <field name="help">A group is a set of functional areas that will be assigned to the user in order to give
+                them access and rights to specific applications and tasks in the system. You can create custom groups or
+                edit the ones existing by default in order to customize the view of the menu that users will be able to
+                see. Whether they can have a read, write, create and delete access right can be managed from here.
+            </field>
+        </record>
+        <menuitem action="action_res_groups" id="hcare_groups" name="HCARE Groups"
+                  parent="pragtech_dental_management.users_root_menu" sequence="20"/>
+    </data>
+</odoo>

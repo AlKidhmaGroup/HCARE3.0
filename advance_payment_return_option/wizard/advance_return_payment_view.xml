@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="return_amount_to_patient_wizard" model="ir.ui.view">
+            <field name="name">return.amount.patient.wizard</field>
+            <field name="model">return.payment.patient</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Return Advance Payment">
+                    <group>
+                        <group>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="journal_id" domain="[('type','in',('bank','cash'))]" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="confirm_advance_payment_return" string="Confirm" type="object"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_return_advance_payment" model="ir.actions.act_window">
+            <field name="name">Return Advance Payment</field>
+            <field name="res_model">return.payment.patient</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="return_amount_to_patient_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

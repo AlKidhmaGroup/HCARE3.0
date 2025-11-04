@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_appt_color,appointment_state_color,calendar_scheduler.model_appointment_state_color,,1,1,1,1
+access_appt_history,appointment_history_all,calendar_scheduler.model_appointment_history,,1,1,1,1
+access_working_time_all,working_time.all,calendar_scheduler.model_working_time,,1,1,1,1
+access_break_type_all,break_type.all,calendar_scheduler.model_break_type,,1,1,1,1

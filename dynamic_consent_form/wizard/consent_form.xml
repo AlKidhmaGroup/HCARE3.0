@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="consent_form_wizard_tree" model="ir.ui.view">
+            <field name="name">consent.wizard.tree</field>
+            <field name="model">consent.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Consent form">
+                    <field name="consent_detail_id" string='Form'/>
+                    <field name="register_date"/>
+                    <field name="patient_id"/>
+                    <field name="doctor_id"/>
+                    <field name="language"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="consent_form_wizard_search">
+            <field name="name">consent.wizard.search</field>
+            <field name="model">consent.wizard</field>
+            <field name="arch" type="xml">
+                <search string="Consent form">
+                    <field name="consent_detail_id"/>
+                    <field name="register_date"/>
+                    <field name="patient_id"/>
+                    <field name="doctor_id"/>
+                    <field name="language"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="consent_form_wizard" model="ir.ui.view">
+            <field name="name">clinical.wizard</field>
+            <field name="model">consent.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Consent form">
+                    <div class="row" attrs="{'invisible': ['|',('header_need', '=', False),('company_header', '=', False)]}" style="border-bottom: 1px solid black;">
+                    	<div class="col-xs-3 mb4">
+	                        <field name="company_header" widget="image" options='{"size": [100,100]}' readonly="1"/>
+	                    </div>
+                    	<div class="col-xs-9 text-right" style="margin-top:22px;"> <field name="header_report_note"/></div>
+                    	
+                    	<div class="col-xs-6" name="company_address">
+	                       <field name="company_id" readonly="1" options="{'no_open': True}"/>
+	                    </div>
+                    </div>
+                    
+                    <group attrs="{'invisible': ['|',('language', '=', 'arabic'),('consent_detail_id', '=', False)]}">
+                        <h2><center><field name="heading_english" nolabel="1" force_save="1" attrs="{'readonly': [('consent_detail_id', '!=', False)]}"/></center></h2>
+                    </group>
+                    <group attrs="{'invisible': ['|',('language', '=', 'english'),('consent_detail_id', '=', False)]}">
+                        <h2><center><field name="heading_arabic" nolabel="1" force_save="1" attrs="{'readonly': [('consent_detail_id', '!=', False)]}"/></center></h2>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="language" />
+                            <field name="patient_id" attrs="{'invisible': [('language', '=', 'arabic')],'readonly': [('consent_detail_id', '=', False)]}" />
+                            <field name="doctor_id" attrs="{'invisible': [('language', '=', 'arabic')],'readonly': [('consent_detail_id', '=', False)]}"/>
+                            <field name="patient_id" attrs="{'invisible': [('language', '=', 'english')],'readonly': [('consent_detail_id', '=', False)]}" string="اسم المريض"/>
+                            <field name="doctor_id" attrs="{'invisible': [('language', '=', 'english')],'readonly': [('consent_detail_id', '=', False)]}" string="الطبيب"/>
+                        </group>
+                        <group>
+                            <field name="register_date" attrs="{'invisible': [('language', '=', 'arabic')],'readonly': [('consent_detail_id', '=', False)]}"/>
+                            <field name="register_date" attrs="{'invisible': [('language', '=', 'english')],'readonly': [('consent_detail_id', '=', False)]}" string="التاريخ"/>
+                            <field name="patient_details" invisible="1"/>
+                            <field name="patient_ref" attrs="{'invisible': [('patient_details', '=', False)]}"/>
+                            <field name="mrn" attrs="{'invisible': [('patient_details', '=', False)]}"/>
+                            <button name="update_consent_detail_id" type="object" string="Update fields" icon="fa-refresh"
+                                    attrs="{'invisible': [('consent_detail_id', '=', False)]}" style="color:red;" invisible="0"/>
+                            <field name="header_need" invisible="1"/>
+                            <field name="test_consent_compute" invisible="1"/>
+                        </group>
+                    </group>
+                    <div attrs="{'invisible': [('language', '=', 'english')]}">
+                     <table style="width:100%;" name="arabic_table">
+                     	<colgroup>
+                           <col width='30%'/>
+                           <col width='70%'/>
+                       </colgroup>
+                     </table>
+                    </div>
+                    <div attrs="{'invisible': [('language', '=', 'arabic')]}">
+                     <table style="width:100%;" name="english_table">
+                     	<colgroup>
+                           <col width='70%'/>
+                           <col width='30%'/>
+                       </colgroup>
+                     </table>
+                    </div>
+                    
+                    <group attrs="{'invisible': [('language', '=', 'arabic')]}">
+                    	<field name="consent_detail_id" options="{'no_create': True, 'no_open': True}" invisible="1"/>
+                    </group>
+                    
+                    <group name="arabic" attrs="{'invisible': [('language', '=', 'english')]}"> 
+                    	<field name="test_consent_compute" invisible="1" nolabel="1"/><field name="arabic_data" invisible="1" nolabel="1"/>
+                    </group>
+                    
+                    <field name="content_english" force_save="1" attrs="{'invisible': ['|',('language', '=', 'arabic'),('consent_detail_id', '=', False)],'readonly': [('consent_detail_id', '!=', False)]}" nolabel="1"/>
+                    <field name="content_arabic" force_save="1" attrs="{'invisible': ['|',('language', '=', 'english'),('consent_detail_id', '=', False)],'readonly': [('consent_detail_id', '!=', False)]}" nolabel="1"/>
+                    <field name="image_1" widget="image" options='{"size": [1000, 1000]}' force_save="1" attrs="{'invisible': ['|',('image_1', '=', False),('consent_detail_id', '=', False)],'readonly': [('consent_detail_id', '!=', False)]}" nolabel="1"/>
+                    <field name="image_2" widget="image" options='{"size": [1000, 1000]}' force_save="1" attrs="{'invisible': ['|',('image_2', '=', False),('consent_detail_id', '=', False)],'readonly': [('consent_detail_id', '!=', False)]}" nolabel="1"/>
+                    
+                    <group name="english_sign" attrs="{'invisible': [('language', '=', 'arabic')]}">
+                    	<field name="sign_xpath_field_id" invisible="1"/>
+                    </group>
+                    <group name="arabic_sign" attrs="{'invisible': [('language', '=', 'english')]}">
+                    	<field name="test_consent_compute" invisible="1" nolabel="1"/><field name="arabic_sign" invisible="1" nolabel="1"/>
+                    </group>
+                	
+                	<div class="footer" attrs="{'invisible': ['|',('header_need', '=', False),('company_footer', '=', False)]}">
+			            <div class="text-center" style="padding-bottom: 5px;border-top: 3px;">
+		                    <div class="row">
+		                        <div name="financial_infos" style="border-top: 1px solid black;">
+		                            <strong>
+		                               <field name="company_footer" readonly="1"/> 
+		                            </strong>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+                    <field name="stamp" img_width="120" img_height="120" width="120" height="120" widget="image" readonly="1" force_save="1" attrs="{'invisible': ['|',('stamp', '=', False),('language', '=', 'arabic')]}"/>
+                    <field name="stamp" img_width="120" img_height="120" width="120" height="120" widget="image" readonly="1" force_save="1" attrs="{'invisible': ['|',('stamp', '=', False),('language', '=', 'english')]}" class="pull-right"/>
+                    <field name="signature" img_width="120" img_height="120" width="120" height="120" widget="image" readonly="1" force_save="1" attrs="{'invisible': ['|',('signature', '=', False),('language', '=', 'arabic')]}"/>
+                    <field name="signature" img_width="120" img_height="120" width="120" height="120" widget="image" readonly="1" force_save="1" attrs="{'invisible': ['|',('signature', '=', False),('language', '=', 'english')]}" class="pull-right"/>
+                    <footer>
+                        <button name="print_consent_report" string="Confirm and Print" type="object"
+                                attrs="{'invisible': [('consent_detail_id', '=', False)]}" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_consents_form" model="ir.actions.act_window">
+                <field name="name">Clinical Form</field>
+                <field name="res_model">consent.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="target">new</field>
+                <field name="view_id" ref="consent_form_wizard"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_consent_records">
+            <field name="name">Signed Clinical Form</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">consent.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

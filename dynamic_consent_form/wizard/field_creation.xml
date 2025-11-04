@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="field_creation_wizard" model="ir.ui.view">
+            <field name="name">consent.field.creation</field>
+            <field name="model">consent.field.creation</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Create Fields">
+                    <group>
+                        <group>
+                            <field name="field_name"/>
+                            <field name="field_type"/>
+                            <field name="is_readonly"/>
+                            <field name="is_related"/>
+                            <field name="dynamic_sequence"/>
+                            <field name="table_field" attrs="{'invisible': [('field_type', 'not in', ('many2one', 'many2many'))],'required': [('field_type', 'in', ('many2one', 'many2many'))]}"/>
+                            <field name="relation_field" attrs="{'invisible': [('field_type', 'not in', ('one2many'))],'required': [('field_type', 'in', ('one2many'))]}"/>
+                            <field name="relation_table_field" attrs="{'invisible': [('field_type', 'not in', ('one2many'))],'required': [('field_type', 'in', ('one2many'))]}" domain="[('state','=','manual')]" options="{'no_create': True, 'no_create_edit':True}"/>
+                        	<field name="bool_line_count" invisible="1"/>
+                        	<field name="sele_line_count" invisible="1"/>
+                        	
+                        </group>
+                        <group>
+                            <field name="model_id" readonly="1"/>
+                            <field name="field_description"/>
+                            <field name="field_arabic_description"/>
+                            <field name="patient_doctor_related" attrs="{'invisible': [('is_related', '=', False)],'required': [('is_related', '=', True)]}"/>
+                            <field name="is_related_relation" attrs="{'invisible': [('is_related', '=', False)],'required': [('is_related', '=', True)]}"/>
+                            <field name="has_dependency" attrs="{'invisible': [('field_type', 'not in', ['boolean', 'selection'])]}"/>
+                                   
+                        </group>
+                        <field name="selection_o2many" attrs="{'invisible': [('field_type', '!=', 'selection')],'required': [('field_type', '=', 'selection')]}" context="{'line_count': sele_line_count,'field_name':field_name,'default_field_count':sele_line_count}">
+                            <tree editable="bottom" >
+                                <field name="field_name" required="1" attrs="{'column_invisible': [('parent.has_dependency', '=', False)]}"/>
+                                <field name="name"/>
+                                <field name="arabic_name" attrs="{'column_invisible': [('parent.has_dependency', '=', False)]}"/>
+                                <field name="char_field" attrs="{'column_invisible': [('parent.has_dependency', '=', False)]}"/>
+                                <field name="text_field" attrs="{'column_invisible': [('parent.has_dependency', '=', False)]}"/>
+                                <field name="none_field" attrs="{'column_invisible': [('parent.has_dependency', '=', False)]}"/>
+                            	<field name="field_count" invisible="1"/>
+                            	
+                            </tree>
+                        </field>
+                        <field name="boolean_fields_ids" attrs="{'invisible': ['|',('has_dependency', '!=', True),('field_type', '!=', 'boolean')],'required': [('field_type', '=', 'boolean')]}" context="{'line_count': bool_line_count,'field_name':field_name,'default_field_count':bool_line_count}">
+                            <tree editable="bottom" >
+                            	<field name="field_name" required="1"/>
+                                <field name="name"/>
+                                <field name="arabic_name"/>
+                                <field name="char_field"/>
+                                <field name="text_field"/>
+                                <field name="none_field"/>
+                                <field name="visible_in"/>
+                                <field name="field_count" invisible="1"/>
+                                
+                            </tree>
+                        </field>
+                    </group>
+                    <group name="group_dependency" attrs="{'invisible': [('has_dependency', '!=', True)]}">
+                        <group>
+                            <field name="dependent_value"/>
+                        </group>
+                        <group>
+                            <field name="dependent_field" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </group>
+                    </group>
+                    <label for="html_default_content" string="English Content" attrs="{'invisible': [('field_type', '!=', 'html')]}"/>
+                    <field name="html_default_content" attrs="{'invisible': [('field_type', '!=', 'html')]}"/>
+                    <label for="html_arabic_default_content" string="Arabic Content" attrs="{'invisible': [('field_type', '!=', 'html')]}"/>
+                    <field name="html_arabic_default_content" attrs="{'invisible': [('field_type', '!=', 'html')]}"/>
+                    <footer>
+                        <button name="create_field_wizard" string="Create fields" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_field_creation" model="ir.actions.act_window">
+                <field name="name">Create Fields</field>
+                <field name="res_model">consent.field.creation</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="field_creation_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <record id="action_model_fields" model="ir.actions.act_window">
+            <field name="name">Fields</field>
+            <field name="res_model">ir.model.fields</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('consent_field', '=', True),('related_xml_field_id', '!=', False)]</field>
+            <field name="view_id" ref="base.view_model_fields_tree"/>
+        </record>
+
+        <menuitem id="menu_consent_field" name="Configuration" parent="menu_consent_management" sequence="3" groups="pragtech_dental_management.group_dental_mng_menu,base.group_system"/>
+        
+        <menuitem id="submenu_consent_field" name="Fields" parent="menu_consent_field" sequence="1" groups="pragtech_dental_management.group_dental_mng_menu,base.group_system"/>
+
+        <menuitem action="action_model_fields" id="ir_model_model_fields" parent="submenu_consent_field" sequence="2"/>
+        
+        <menuitem id="menu_field_creation" name="Create Fields" action="action_field_creation"
+                  parent="submenu_consent_field" sequence="1"/>
+
+    </data>
+</odoo>

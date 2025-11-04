@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="FieldColor">
+        <span t-attf-class="oe_form_field {{widget.widget_class}}" t-att-style="widget.attrs.style">
+            <input type="text"
+               t-att-id="widget.id_for_label"
+               t-att-tabindex="widget.attrs.tabindex"
+               t-att-autofocus="widget.attrs.autofocus"
+               t-att-placeholder="widget.attrs.placeholder"
+               t-att-maxlength="widget.field.size"
+               t-att-value="widget.value"
+               class="o_input"
+               t-if="widget.mode !== 'readonly'"/>
+            <t t-else="">
+                <div t-if="!('readonly_mode' in widget.nodeOptions) or widget.nodeOptions.readonly_mode != 'text'" class="color_box" t-attf-style="background-color: {{widget.value}}" />
+                <span t-if="!('readonly_mode' in widget.nodeOptions) or widget.nodeOptions.readonly_mode != 'color'" class="oe_form_char_content"><t t-esc="widget.value" /></span>
+            </t>
+        </span>
+    </t>
+
+    <div t-name="pragtech_dental_management.FormPreviewMessage" class="modal draggable fade">
+		<div class="modal-dialog">
+			<div class="modal-content" t-att-style="style_val">
+				<div class="modal-header">
+					<h3 id="modalTitle" class="modal-title">
+						<t t-raw="main_title"/>
+					</h3>
+				</div>
+				<div id="modalBody" class="modal-body">
+					<div class="row body" t-foreach="sections" t-as="section">
+						<div class="col-md-12 preview_section_title" t-if="section['title']">
+							<h4><t t-raw="section['title']"/></h4>
+						</div>
+						<div class="col-md-12 preview_body">
+							<t t-raw="section['content']"/>
+						</div>
+						<div class="col-md-12"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default close_preview"
+							data-dismiss="modal">Ok
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</templates>

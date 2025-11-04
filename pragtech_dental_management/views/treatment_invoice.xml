@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="treatment_invoice_view">
+        <field name="name">Treatment Line</field>
+        <field name="model">treatment.invoice</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Treatment">
+                <group>
+                    <group>
+                        <field name="appointment_id"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+
+                        <field name="diagnosis_id"
+                               groups="pragtech_dental_management.group_enable_diagnosis_in_payment_lines"
+                               widget="many2many_tags" string="Teeth"/>
+                        <field name="teeth_code_rel"
+                               groups="pragtech_dental_management.group_enable_diagnosis_in_payment_lines"/><!-- # changes by mubaris -->
+                        <field name="treatment_id"/>
+                        <field name="actual_amount" invisible="1"/>
+                        <field name="amount_edit" invisible="1"/>
+                        <field name="unit_price" attrs="{'readonly':[('amount_edit','=',False)]}" force_save="1"/>
+                        <field name="discount_fixed_percent"/>
+                        <field name="discount"/>
+                        <field name="discount_value"/>
+                        <field name="amount" readonly="1"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="treatment_invoice_tree">
+        <field name="name">Treatment Invoice</field>
+        <field name="model">treatment.invoice</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Treatment Lines" editable="bottom">
+                <field name="diagnosis_id" groups="pragtech_dental_management.group_enable_diagnosis_in_payment_lines"/>
+                <field name="teeth_code_rel" groups="pragtech_dental_management.group_enable_diagnosis_in_payment_lines"
+                       widget="many2many_tags" string="Teeth"/><!-- # changes by mubaris -->
+                <field name="appointment_id" invisible="1"/>
+                <field name="treatment_id" invisible="1"/>
+                <field name="description" options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="note"/>
+                <field name="actual_amount" invisible="1"/>
+                <field name="amount_edit" invisible="1"/>
+                <field name="unit_price" attrs="{'readonly':[('amount_edit','=',False)]}" force_save="1" sum="Total Actual Amt"/>
+                <field name="discount_fixed_percent"
+                       groups="pragtech_dental_management.group_enable_discount_in_payment_lines"/>
+                <field name="discount" attrs="{'readonly':[('discount_fixed_percent','!=','Percent')]}"
+                       groups="pragtech_dental_management.group_enable_discount_in_payment_lines"/>
+                <field name="discount_value" attrs="{'readonly':[('discount_fixed_percent','!=','Fixed')]}"
+                       groups="pragtech_dental_management.group_enable_discount_in_payment_lines" sum="Total Disc Amt"/>
+                <field name="amount" readonly="1" force_save="1"
+                       groups="pragtech_dental_management.group_enable_discount_in_payment_lines" sum="Total After Discount"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<data>
+		<record id="appointment_patient_vip" model="ir.ui.view">
+			<field name="name">medical.patient.view</field>
+			<field name="model">medical.patient</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@name='button_box']" position="after">
+<!--					<field name="is_vip" invisible="1"/>-->
+					<field name="frequent_cancel" invisible="1"/>
+					<field name="has_insurance" invisible="1"/>
+					<field name="is_child" invisible="1"/>
+					<widget name="web_ribbon" show_stars="True"
+							visibility="is_vip=true"
+							title="VIP Patient" bg_color="bg-lightgreen" />
+					<field name="insurance_icon" icon_url="/calendar_scheduler/static/src/img/insurance.jpeg"
+						   attrs="{'invisible': [('has_insurance', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="child_icon" icon_url="/calendar_scheduler/static/src/img/child.jpeg"
+						   attrs="{'invisible': [('is_child', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="cancel_icon" icon_url="/calendar_scheduler/static/src/img/cancelled.jpeg"
+						   attrs="{'invisible': [('frequent_cancel', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+				</xpath>
+				<field name="is_vip" position="after">
+					<field name="frequent_cancel"/>
+				</field>
+			</field>
+		</record>
+
+		<record id="appointment_customer_vip" model="ir.ui.view">
+			<field name="name">medical.appointment.view</field>
+			<field name="model">medical.appointment</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+			<field name="arch" type="xml">
+				<field name="name" position="before">
+					<field name="has_insurance" invisible="1"/>
+					<field name="is_child" invisible="1"/>
+					<field name="frequent_cancel" invisible="1"/>
+					<field name="urgent_icon" icon_url="/calendar_scheduler/static/src/img/emergency.jpg"
+						   attrs="{'invisible': ['|',('urgency', '=', False),('show_urgency_icon', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="new_icon" icon_url="/calendar_scheduler/static/src/img/new_patient.jpg"
+						   attrs="{'invisible': ['|',('is_registered', '=', True),('show_new_icon', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="follow_icon" icon_url="/calendar_scheduler/static/src/img/followup_patient.jpg"
+						   attrs="{'invisible': ['|',('followup', '=', False),('show_followup_icon', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="insurance_icon" icon_url="/calendar_scheduler/static/src/img/insurance.jpeg"
+						   attrs="{'invisible': [('has_insurance', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="child_icon" icon_url="/calendar_scheduler/static/src/img/child.jpeg"
+						   attrs="{'invisible': [('is_child', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+					<field name="cancel_icon" icon_url="/calendar_scheduler/static/src/img/cancelled.jpeg"
+						   attrs="{'invisible': [('frequent_cancel', '=', False)]}"
+						   widget="patient_icon" readonly="1"/>
+				</field>
+				<xpath expr="//header" position="inside">
+					<button string="Reschedule" type="object" name="action_reschedule"
+                            states="draft,confirmed,missed,cancel"/>
+				</xpath>
+
+				<xpath expr="//div[@name='button_box']" position="after">
+					<!--the domains for controlling the visibility is not perfect here!
+					Right now it support only one simple condition-->
+					<field name="is_vip" invisible="1"/>
+					<widget name="web_ribbon" show_stars="True"
+							visibility="is_vip=true"
+							title="VIP Patient" bg_color="bg-lightgreen" />
+				</xpath>
+				<xpath expr="//notebook[1]" position="inside">
+					<page name="reschedule_info" string="Reschedule Info"
+					      attrs="{'invisible': [('reschedule_count', '&lt;=', 0)]}">
+						<field name="reschedule_count" invisible="1"/>
+						<field name="history_line_ids" readonly="1">
+							<tree>
+								<field name="doctor"/>
+								<field name="appointment_sdate"/>
+								<field name="appointment_edate"/>
+							</tree>
+							<form>
+								<sheet>
+									<group>
+										<field name="doctor"/>
+										<field name="appointment_sdate"/>
+										<field name="appointment_edate"/>
+									</group>
+								</sheet>
+							</form>
+						</field>
+					</page>
+				</xpath>
+				<xpath expr="//field[@name='urgency']" position="after">
+					<field name="show_new_icon" invisible="1"/>
+					<field name="show_urgency_icon" invisible="1"/>
+					<field name="show_followup_icon" invisible="1"/>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="saloon_scheduler_view" model="ir.ui.view">
+			<field name="name">medical.appointment.view</field>
+			<field name="model">medical.appointment</field>
+			<field name="arch" type="xml">
+				<scheduler date_start="appointment_sdate"
+						   date_stop="appointment_edate"
+						   avatar_model="res.partner"
+						   mode="agendaDay"
+						   string="Appointmentsss">
+					<field name="patient_name" invisible="1"/>
+					<field name="patient_phone" invisible="1"/>
+					<field name="break_time" invisible="1"/>
+					<field name="doctor_user" />
+					<field name="patient_name_phone" />
+					<field name="patient_name" />
+					<field name="patient_file_no"/>
+					<field name="room_id"/>
+					<field name="comments"/>
+					<!-- Additional Fields Added -->
+					<field name="urgency" invisible="1"/>
+					<field name="followup" invisible="1"/>
+					<field name="is_registered" invisible="1"/>
+					<field name="show_new_icon" invisible="1"/>
+					<field name="show_urgency_icon" invisible="1"/>
+					<field name="show_followup_icon" invisible="1"/>
+					<!-- Additional Fields Added -->
+					<field name="appointment_sdate" invisible="1"/>
+					<field name="appointment_edate" invisible="1"/>
+					<field name="doctor" invisible="1"/>
+					<field name="is_vip" invisible="1"/>
+					<field name="frequent_cancel" invisible="1"/>
+					<field name="is_child" invisible="1"/>
+					<field name="has_insurance" invisible="1"/>
+					<field name="amount_due" invisible="1"/>
+					<field name="amount_advance" invisible="1"/>
+				</scheduler>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_appointments">
+			<field name="name">Appointments</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_mode">scheduler,tree,form</field>
+			<field name="view_type">form</field>
+		</record>
+
+		<menuitem name="Appointments"
+				  id="menu_appintments"
+				  action="action_appointments"
+				  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"/>
+
+		<record model="ir.ui.view" id="medical_hospital_oprating_room_ext">
+            <field name="name">Clinic Oprating Rooms</field>
+            <field name="model">medical.hospital.oprating.room</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_hospital_oprating_room_view"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+					<field name="allowed_doctors" widget="many2many_tags"/>
+				</field>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="medical_physician_view_ext">
+            <field name="name">Physician</field>
+            <field name="model">medical.physician</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_physician_view"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+					<field name="allowed_rooms" widget="many2many_tags"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

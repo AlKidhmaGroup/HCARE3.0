@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="pragtech_dental_management.res_config_settings_view_form_hcare"/>
+        <field name="arch" type="xml">
+            <div data-key="hcare" position="inside">
+                <h2>Dynamic Consent</h2>
+                <div class="row mt16 o_settings_container" id="consent_form_font_size">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="consent_form_font_size"
+                         title="Consent Font Size">
+                            <div class="row">
+                                <label class="col-md-3 o_light_label" string="Font Size(In px)" for="consent_form_font_size"/>
+                                <field name="consent_form_font_size" class="oe_inline"/>
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="consent_form_header_footer">
+                        <div class="o_setting_left_pane">
+                            <field name="consent_header"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="consent_header"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

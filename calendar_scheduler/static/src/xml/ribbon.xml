@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+
+    <t t-name="calendar_scheduler.ribbon">
+        <div t-att-class="'ribbon ribbon-top-right ' + widget.custom_class">
+            <span t-att-class="widget.bgColor ? widget.bgColor : 'bg-success'"
+                  t-att-title="widget.text">
+                <t t-if="widget.show_stars">
+                    <i class="fa fa-star checked"/>
+                    <i class="fa fa-star checked"/>
+                    <i class="fa fa-star checked"/>
+                </t>
+                <t t-else="">
+                    <t t-esc="widget.text"/>
+                </t>
+            </span>
+        </div>
+    </t>
+
+</template>

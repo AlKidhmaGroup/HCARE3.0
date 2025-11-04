@@ -1,0 +1,14 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_consent_dashboard,access_consent_dashboard,model_consent_dashboard,,1,1,1,1
+access_ir_model_fields,access_ir_model_fields,base.model_ir_model_fields,,1,1,1,1
+access_consent_details_hcare_admin,access_consent_details_hcare_admin,model_consent_details,pragtech_dental_management.group_dental_mng_menu,1,1,1,1
+access_consent_details_main_admin,access_consent_details_main_admin,model_consent_details,base.group_system,1,1,1,1
+access_consent_details_non_admin,access_consent_details_non_admin,model_consent_details,,1,1,0,1
+access_consent_wizard,access_consent_wizard,model_consent_wizard,,1,1,1,1
+access_ir_model_data,access_ir_model_data,base.model_ir_model_data,,1,1,1,1
+access_ir_ui_view,access_ir_ui_view,base.model_ir_ui_view,,1,1,1,1
+ir aaccess_ir_actions_report,access_ir_actions_report,base.model_ir_actions_report,,1,1,1,1
+access_category,access_category,model_consent_details_category,,1,1,1,1
+access_selection_field_values,access_selection_field_values,model_selection_field_values,base.group_user,1,1,1,1
+access_boolean_field_values,access_boolean_field_values,model_boolean_field_values,base.group_user,1,1,1,1
+access_consent_defaults,access_consent_defaults,model_consent_defaults,base.group_user,1,1,1,1

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+<data>
+
+    <record model="sms.template" id="appointment_reminder">
+        <field name="name">Appointment Reminder</field>
+        <field name="message">عزيزي المراجع/ه - {patient} يرجى العلم بأنه لديك موعد بتاريخ {appt_date}
+            عند الساعه {appt_time}.مع د/{doctor}إذا كان لديك تغيير للموعد الرجاء الإتصال {company_phone}
+            Dear {patient} you have an appointment {appt_date} at {appt_time} with Dr. {doctor} , if there is any change pls call {company_phone}
+        </field>
+    </record>
+
+    <record model="sms.template" id="payment_template">
+        <field name="name">Payment Template</field>
+        <field name="message">            عزيزي {patient} ، تم دفع الفاتورة {bill} بنجاح. المبلغ المدفوع: {amount} المستحق:{due}
+            Dear {patient},Your Payment for  the bill {bill} is successful. Amount Paid : {amount} Due : {due}
+        </field>
+    </record>
+
+</data>
+</odoo>

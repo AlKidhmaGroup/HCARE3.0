@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+
+    <record id="income_by_doctor_dpt_filtre" model="ir.ui.view">
+        <field name="name">Income By Doctor Department Filter</field>
+        <field name="model">income.by.doctor.report.wizard</field>
+        <field name="inherit_id" ref="pragtech_dental_management.view_income_by_doctor_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='doctor_ids']" position="before">
+                <field name="department_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</data>
+</odoo>

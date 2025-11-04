@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_income_by_doctor">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<div class="row">
+								<div style="color:#009688;" class="text-center">
+									 <h2><b>Income By Doctor</b></h2>
+								 </div>
+								<center>
+								 <table name="master" width="100%">
+									<colgroup>
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+									</colgroup>
+									<thead>
+										<tr>
+											<th/>
+											<th/>
+											<th/>
+											<th/>
+										</tr>
+									</thead>
+									<tbody class="patient_invoice_tbody">
+										<tr>
+											<td style="color:#009688;"><strong>Period From</strong></td>
+											<td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Report Date</strong></td>
+											<td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Period To</strong></td>
+											<td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Based On</strong></td>
+                                            <td>:<span t-esc="date_type"/></td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Doctors</strong></td>
+											<td>: <span t-esc="doctor_list" /></td>
+											<td/>
+                                            <td/>
+										</tr>
+									</tbody>
+								</table>
+							 </center>
+							<br/>
+							</div>
+							<table class="table table-bordered table-striped" t-if="date_type == 'Invoice Date'">
+								<thead>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Doctor</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">No. of Patients</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Amount</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Cash</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Insurance</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Due</th>
+								</thead>
+								<tbody>
+									<t t-set="inv_customer_count_total" t-value="0"/>
+									<t t-set="inv_total_amount_total" t-value="0"/>
+									<t t-set="inv_cash_total" t-value="0"/>
+									<t t-set="inv_credit_total" t-value="0"/>
+									<t t-set="inv_insurance_total" t-value="0"/>
+									<t t-set="inv_due_total" t-value="0"/>
+									<tr t-foreach="get_income_by_dentist_info" t-as="line">
+										<t t-if="line">
+											<t t-set="inv_customer_count_total" t-value="inv_customer_count_total+line['customer_count']"/>
+											<t t-set="inv_total_amount_total" t-value="inv_total_amount_total+line['total_amount']"/>
+											<t t-set="inv_cash_total" t-value="inv_cash_total+line['cash']"/>
+											<t t-set="inv_credit_total" t-value="inv_credit_total+line['credit']"/>
+											<t t-set="inv_insurance_total" t-value="inv_insurance_total+line['insurance']"/>
+											<t t-set="inv_due_total" t-value="inv_due_total+line['due']"/>
+											<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['dentist_name']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+												<t t-esc="line['customer_count']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+												<t t-esc="line['total_amount']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+												<t t-esc="line['cash']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+												<t t-esc="line['credit']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+												<t t-esc="line['insurance']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+												<t t-esc="line['due']" />
+											</td>
+										</t>
+									</tr>
+									<tr >
+										<td style="text-align: center;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+											<strong>TOTAL</strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+											<strong><t t-esc="inv_customer_count_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+											<strong><t t-esc="inv_total_amount_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+											<strong><t t-esc="inv_cash_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+											<strong><t t-esc="inv_credit_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+											<strong><t t-esc="inv_insurance_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >
+											<strong><t t-esc="inv_due_total" /></strong>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table table-bordered table-striped" t-if="date_type == 'Payment Date'">
+								<thead>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Name of Doctors</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Cash Income</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Credit Income</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Income</th>
+								</thead>
+								<tbody>
+									<t t-set="cash_total" t-value="0"/>
+									<t t-set="card_total" t-value="0"/>
+									<t t-set="cash_card_total" t-value="0"/>
+									<tr t-foreach="get_income_by_dentist_info" t-as="line">
+										<t t-if="line">
+											<td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['dentist_name']" />
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['cash']" />
+												<t t-set="cash_total" t-value="cash_total+line['cash']"/>
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['credit']" />
+												<t t-set="card_total" t-value="card_total+line['credit']"/>
+											</td>
+											<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['total_income']" />
+												<t t-set="cash_card_total" t-value="cash_card_total+line['total_income']"/>
+											</td>
+										</t>
+									</tr>
+									<tr >
+										<td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+											<strong>TOTAL</strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+											<strong><t t-esc="cash_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+											<strong><t t-esc="card_total" /></strong>
+										</td>
+										<td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+											<strong><t t-esc="cash_card_total" /></strong>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_hcare" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hcare</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="HCARE" string="HCARE" data-key="hcare"
+                     groups="pragtech_dental_management.group_dental_mng_menu">
+                    <h2>Appointment</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_completion"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_completion"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_completion_complaint"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_completion_complaint"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_completion_treatment_plan"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_completion_treatment_plan"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_auto_missed"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_auto_missed"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_checkin"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_checkin"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="restrict_drug_list_doctors"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="restrict_drug_list_doctors"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_mdc_quantity_paylines"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_mdc_quantity_paylines" string="Quantity on payment lines"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_concerned_doctor_clinical_finding"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_concerned_doctor_clinical_finding" string="Multiple Complaints and Findings(Doctor Favourite)"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_concerned_doctor_p_diagnosis"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_concerned_doctor_p_diagnosis" string="Multiple Primary diagnosis"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_concerned_doctor_procedure"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_concerned_doctor_procedure" string="Multiple Procedure(Doctor Favourite)"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_dashboard_complaint_form"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="group_dashboard_complaint_form"/>
+                                </div>
+                            </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="show_only_dr_alert"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="show_only_dr_alert"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="feedback_delete_allow"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="feedback_delete_allow"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_hcare_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'hcare'}</field>
+    </record>
+
+    <menuitem id="menu_hcare_general_settings" name="Settings" parent="medical_conf_menu"
+        sequence="0" action="action_hcare_configuration" groups="base.group_system"/>
+
+</odoo>

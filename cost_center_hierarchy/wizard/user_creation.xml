@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_user_creation_inherit" model="ir.ui.view">
+        <field name="name">user.creation.form</field>
+        <field name="model">user.creation</field>
+        <field name="inherit_id" ref="pragtech_dental_management.view_user_creation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name ='room_ids']" position="after">
+                <field name="code" attrs="{'invisible': [('doctor', '=', False)]}"/>
+                <field name="department" invisible="1"/>
+                <field name="department_id" attrs="{'invisible': [('doctor', '=', False)], 'required': [('doctor', '!=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name ='physician_ids']" position="after">
+                <field name="speciality"
+                       attrs="{'invisible': [('doctor', '=', False)], 'required': [('doctor', '!=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="Update Serface">
+            <field name="name">Automatic updation of surface</field>
+            <field name="model_id" ref="model_medical_teeth_treatment"/>
+            <field name="state">code</field>
+            <field name="numbercall">-1</field>
+            <field name="code">model.scheduler_update_surface()</field>
+            <field name="args" eval="'()'" />
+        </record>
+
+        <record model="ir.cron" id="auto_missed_option">
+            <field name="name">Auto missed option</field>
+            <field name="model_id" ref="model_medical_appointment"/>
+            <field name="state">code</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="code">model.fun_auto_missed_option()</field>
+            <field name="args" eval="'()'" />
+        </record>
+
+        <record model="ir.cron" id="Complaints_and_Findings_char_to_many2many_update">
+            <field name="name">Complaints and Findings(Update field values: Character to Many2many, Many2many to Character)</field>
+            <field name="model_id" ref="pragtech_dental_management.model_complaint_finding"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="code">model.update_complaint_finding_char_to_manytomany_to_char()</field>
+            <field name="args" eval="'()'"/>
+        </record>
+
+        <record model="ir.cron" id="diagnosis_char_to_many2many_update">
+            <field name="name">Diagnosis (Update field values: Character to Many2many, Many2many to Character)</field>
+            <field name="model_id" ref="pragtech_dental_management.model_complaint_finding"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="code">model.update_diagnosis_char_to_manytomany_to_char()</field>
+            <field name="args" eval="'()'"/>
+        </record>
+
+        <record model="ir.cron" id="procedure_char_to_many2many_update">
+            <field name="name">Procedure(Update field values: Character to Many2many, Many2many to Character)</field>
+            <field name="model_id" ref="pragtech_dental_management.model_complaint_finding"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="False"/>
+            <field name="code">model.update_procedure_char_to_manytomany_to_char()</field>
+            <field name="args" eval="'()'"/>
+        </record>
+
+
+
+    </data>
+</odoo>

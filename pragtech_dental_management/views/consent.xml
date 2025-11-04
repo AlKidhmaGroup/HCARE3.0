@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="consent_consent_form_view">
+            <field name="name">Consents</field>
+            <field name="model">consent.consent</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="model_name"/>
+                        </group>
+                        <notebook>
+                            <page name="treatments" string="Treatments">
+                                <field name="treatment_ids" context="{'default_consent_id':id}">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="consent_consent_tree">
+            <field name="name">Consents</field>
+            <field name="model">consent.consent</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="model_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="consent_consent_search" model="ir.ui.view">
+            <field name="name">Consents</field>
+            <field name="model">consent.consent</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Consents">
+                    <field name="name"/>
+                    <field name="model_name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_consent_consent">
+            <field name="name">Consents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">consent.consent</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_consent_consent" id="menu_consents"
+                  parent="pragtech_dental_management.medical_conf_menu" sequence="2"/>
+
+    </data>
+</odoo>

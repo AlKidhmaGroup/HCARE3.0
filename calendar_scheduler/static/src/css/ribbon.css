@@ -1,0 +1,33 @@
+.ribbon {
+    height: 35px;
+    width: 100%;
+    display: table;
+    background-color: #96e4b194;
+}
+
+.ribbon span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: orange;
+}
+
+.pat_icon {
+    float: left;
+}
+.pat_icon.o_field_empty:not(.o_invisible_modifier) {
+    display: block !important;
+}
+.ribbon_div {
+    float: left;
+    padding: 1px;
+}
+
+img.pat_icon {
+  width: 50px;
+  height: 50px;
+}
+.source_sch_evt img.pat_icon {
+  width: 22px;
+  height: 22px;
+}

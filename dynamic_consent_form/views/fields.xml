@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="fields_view_enhanced">
+		<field name="name">fields</field>
+		<field name="model">ir.model.fields</field>
+		<field name="inherit_id" ref="base.view_model_fields_form" />
+		<field name="arch" type="xml">
+			 <xpath expr="//field[@name = 'help']" position="after">
+				 <field name="html_default_content" attrs="{'invisible': [('ttype', '!=', 'html')]}"/>
+				 <field name="html_arabic_default_content" attrs="{'invisible': [('ttype', '!=', 'html')]}"/>
+			 </xpath>
+			 <xpath expr="//sheet/group" position="before">
+				 <div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button"
+								options='{"terminology": "archive"}'/>
+						</button>
+					</div>
+			 </xpath>
+			 <xpath expr="//field[@name = 'field_description']" position="after">
+			 	<field name="field_arabic_description"/>
+			 	<field name="dynamic_sequence"/>
+			 	<field name="has_dependency" invisible="0"/>
+			 	<field name="dependent_value" attrs="{'invisible': [('has_dependency', '!=', True)]}"/>
+			 	<field name="dependent_field" attrs="{'invisible': [('has_dependency', '!=', True)]}"/>
+             </xpath>
+             
+             <xpath expr="//notebook" position="inside">
+             	<page string='Selection Related Fields' attrs="{'invisible': [('ttype', '!=', 'selection')]}">
+             		<field name="select_related_field_ids">
+                            <tree editable="bottom" >
+                                <field name="value"/>
+                                <field name="related_field_id"/>
+                            </tree>
+                   </field>
+             	</page>
+             	<page string='Boolean Related Fields' attrs="{'invisible': [('ttype', '!=', 'boolean')]}">
+             		<field name="boolean_related_field_ids">
+                            <tree editable="bottom" >
+                                <field name="value"/>
+                                <field name="related_bool_field_id"/>
+                                <field name="related_text_field_id"/>
+                                <field name="visible_in"/>
+                            </tree>
+                   </field>
+             	</page>
+             	<page string='Default Values' attrs="{'invisible': [('ttype', '!=', 'one2many')]}">
+             		<field name="defaults_fields_ids">
+                            <tree editable="bottom" >
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="arabic_name"/>
+                            </tree>
+                   </field>
+             	</page>
+             </xpath>
+             
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="model_view_enhanced">
+		<field name="name">Model</field>
+		<field name="model">ir.model</field>
+		<field name="inherit_id" ref="base.view_model_form"/>
+		<field name="arch" type="xml">
+			 <xpath expr="//field[@name='field_id']/tree" position="inside">
+			 	<field name="visible_in_consent_tree"/>
+			 	<field name="dynamic_sequence" invisible="1"/>
+			 </xpath>
+			 <xpath expr="//field[@name='field_id']/form/notebook/page/group/group[1]" position="inside">
+			 	<field name="visible_in_consent_tree"/>
+			 	<field name="dynamic_sequence"/>
+			 </xpath>
+			 
+			 <xpath expr="//notebook/page" position="inside">
+			 	<button icon="fa-align-justify" name="update_consent_view" string="Update Consent View Tree" type="object" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+			 	<label for="consent_no_create" style="padding-left:5px;" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+			 	<field name="consent_no_create" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+			 	<label for="consent_no_delete" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+				<field name="consent_no_delete" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+			 	<label for="name_readonly" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+				<field name="name_readonly" attrs="{'invisible': [('state', '!=', 'manual')]}"/>
+			 </xpath>
+			 
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<data>
+		<record id="view_break_time_tree" model="ir.ui.view">
+			<field name="name">Break Time Tree</field>
+			<field name="model">working.time</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="time_from"/>
+					<field name="time_to"/>
+					<field name="type" invisible="1"/>
+					<field name="hide_slots"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_break_time_form" model="ir.ui.view">
+			<field name="name">Break Time Form</field>
+			<field name="model">working.time</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                    options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+						<group>
+							<group>
+								<field name="type" invisible="1"/>
+								<field name="time_from"/>
+								<field name="time_to"/>
+							</group>
+							<group>
+								<field name="hide_slots"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_scheduler_break" model="ir.actions.act_window">
+			<field name="name">Break Hours</field>
+			<field name="res_model">working.time</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'default_type': 'off'}</field>
+			<field name="view_ids"
+				   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_break_time_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_break_time_form')})]"/>
+		</record>
+
+		<menuitem name="Break Hours" id="menu_appt_break"
+				  action="action_scheduler_break" parent="calendar_scheduler.appointment_sched_config_menu"
+				  sequence="20" />
+	</data>
+</odoo>

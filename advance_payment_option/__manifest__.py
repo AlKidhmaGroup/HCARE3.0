@@ -1,0 +1,23 @@
+{
+    'name': "Advance Payment Management",
+    'version': '0.4',
+    'sequence': 2,
+    'author': 'Al Khidma Systems',
+    'category': 'Invoicing',
+    'description': 'Allows you to manage advance payment collection',
+    'depends': ['base', 'web', 'pragtech_dental_management'],
+    'data': [
+        'scheduler/scheduler.xml',
+        'wizard/change_amount_to_other_patient_wizard.xml',
+        'views/advance_payments.xml',
+        'wizard/adv_payment_wizard.xml',
+        'reports/report.xml',
+        'reports/adv_payment_report.xml',
+        'reports/advance_payment_reciept_template.xml',
+        # 'security/ir.model.access.csv',
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

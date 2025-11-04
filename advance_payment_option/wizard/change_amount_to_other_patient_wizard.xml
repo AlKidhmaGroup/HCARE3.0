@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="change_amount_to_patient_wizard" model="ir.ui.view">
+            <field name="name">change.amount.patient.wizard</field>
+            <field name="model">change.amount.patient</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Change Amount to Other Patient">
+                    <group>
+                        <group>
+                            <field name="patient_id" />
+                            <field name="amount" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="confirm_amount_transfer_patients" string="Confirm" type="object"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_change_amount_to_other_patient" model="ir.actions.act_window">
+            <field name="name">Change Amount to Other Patient</field>
+            <field name="res_model">change.amount.patient</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="change_amount_to_patient_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

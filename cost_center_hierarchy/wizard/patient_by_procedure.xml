@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="patient_by_procedure_new_view_ext">
+			<field name="name">patient.by.procedure.wizard.extended</field>
+			<field name="model">patient.by.procedure.wizard</field>
+			<field name="inherit_id" ref="pragtech_dental_management.patient_by_procedure_new_view"/>
+			<field name="arch" type="xml">
+				<field name="date_end" position="after">
+					<field name="department_ids" widget="many2many_tags"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+
+    <t t-name="calendar_scheduler.patient_icon">
+        <div t-att-class="'patient_icon ' + custom_class">
+            <img t-att-src="icon_url" class="pat_icon"/>
+        </div>
+    </t>
+
+</template>

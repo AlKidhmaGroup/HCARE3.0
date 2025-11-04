@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="advance_payments_form_inherited_return_option" model="ir.ui.view">
+            <field name="name">account.payment.form.advance.inherited</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="advance_payment_option.advance_payments_form"/>
+                <field name="arch" type="xml">
+                	
+                  	<xpath expr="//header" position="inside">
+					 	<button name="%(action_return_advance_payment)d" class="oe_highlight" string="Return Advance Payment"
+                            attrs="{'invisible': ['|',('state', 'not in', ('posted')),('amount_complete', '=', False)]}"
+                            type="action"/>
+                       <button name="view_advance_patient" class="oe_highlight" string="View Patient" type="object"/>
+             		</xpath> 
+             		
+             		<xpath expr="//field[@name='payment_method_code']" position="after">
+                    	<field name="advance_return" invisible='1'/>
+                    	<field name="return_payment_id" invisible='1'/>
+                    	<field name="amount_complete" invisible='1'/>
+                   </xpath>
+                    
+                    <xpath expr="//header/button[@name='%(advance_payment_option.action_change_amount_to_other_patient)d']" position="attributes">
+                		<attribute name="attrs">{'invisible': ['|',('state', 'in', ('draft', 'cancelled')),('advance_return','=',True)]}</attribute>
+            		</xpath>
+            		
+            		<xpath expr="//field[@name='partner_id']" position="attributes">
+            			<attribute name="options">{'no_create': True, 'no_create_edit':True,'always_reload': True,'no_open':True}</attribute>	
+            		</xpath>
+                    
+                    <xpath expr="//sheet" position="inside">
+                    <notebook attrs="{'invisible': [('return_payment_ids', '=',[])]}">
+                    	<page>
+                    		<separator string="Return Advance"/>
+                    		<field name="return_payment_ids" readonly="1">
+		                         <tree string='Return Advance'>
+		                            <field name="name"/>
+		                            <field name="partner_id"/>
+		                            <field name="journal_id"/>
+		                            <field name="amount"/>
+		                            <field name="state"/>
+		                        </tree>
+		                        <form>
+		                        	<group>
+		                        		<group>
+			                        		<field name="name"/>
+				                            <field name="partner_id"/>
+				                            <field name="journal_id"/>
+		                        		</group>
+		                        		<group>
+				                            <field name="amount"/>
+				                            <field name="state"/>
+		                        		</group>
+		                        	</group>
+		                        </form>
+                    		</field>
+                    	</page>
+                    </notebook>
+                    </xpath>
+                    
+                </field>
+        </record>
+    </data>
+</odoo>

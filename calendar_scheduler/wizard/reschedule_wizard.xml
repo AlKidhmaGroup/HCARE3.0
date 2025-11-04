@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_appt_reschedule_wizard" model="ir.ui.view">
+            <field name="name">Reschedule Appointment</field>
+            <field name="model">reschedule.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Current Status">
+                            <field name="appointment_id" invisible="1"/>
+                            <field name="appointment_sdate_old" readonly="1"/>
+                            <field name="appointment_edate_old" readonly="1"/>
+                            <field name="doctor" readonly="1"/>
+                        </group>
+                        <group string="Change to">
+                            <field name="appointment_sdate" required="1"/>
+                            <field name="appointment_edate" required="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="do_reschedule" string="Update"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_appt_reschedule_analysis" model="ir.ui.view">
+            <field name="name">Reschedule Appointment</field>
+            <field name="model">reschedule.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="doctor_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="patient_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_report" string="Print"
+                                type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_reschedule_wizard" model="ir.actions.act_window">
+            <field name="name">Rescheduled Appointments</field>
+            <field name="res_model">reschedule.wizard</field>
+            <field name="target">new</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_appt_reschedule_analysis"/>
+        </record>
+
+        <menuitem name="Rescheduled Appointments"
+                  id="menu_reschedule_wizard"
+                  parent="pragtech_dental_management.dental_report_menu"
+                  action="action_reschedule_wizard"/>
+    </data>
+</odoo>

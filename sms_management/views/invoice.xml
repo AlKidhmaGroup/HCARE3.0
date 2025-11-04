@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_payment_sms" model="ir.ui.view">
+            <field name="name">Payment SMS invoice</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_draft']" position="after">
+                    <field name="payment_sms_pending"  invisible="1" />
+                    <button name="send_payment_sms"
+                            attrs="{'invisible':[('payment_sms_pending','!=',True)]}"
+                            string="Send Payment SMS" type="object" class="oe_highlight"
+                    />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

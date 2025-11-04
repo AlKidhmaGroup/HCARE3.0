@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="consent_dashboard_kanban" model="ir.ui.view">
+        <field name="name">consent.dashboard.kanban</field>
+        <field name="model">consent.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" create="false">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="col-xs-1 o_kanban_primary_left">
+                            <button class="btn btn-primary fa fa-file-o" name="%(action_consents_details)d" type="action">Clinical Forms</button>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <button class="btn btn-primary fa fa-file-o" name="%(action_consent_records)d" type="action">Signed Clinical Forms</button>
+						</div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_consent_dashboard">
+        <field name="name">Dashboard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">consent.dashboard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+
+    <menuitem name="Dashboard" action="action_consent_dashboard" id="dental_scheduler"
+              parent="menu_consent_management" sequence="1"/>
+
+</odoo>

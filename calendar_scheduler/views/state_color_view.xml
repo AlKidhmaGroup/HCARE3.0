@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<data>
+		<record id="appointments_config_tree" model="ir.ui.view">
+			<field name="name">appointments_config_tree</field>
+			<field name="model">appointment.state.color</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="appointments_config_form" model="ir.ui.view">
+			<field name="name">appointments_config_form</field>
+			<field name="model">appointment.state.color</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="state"/>
+							</group>
+							<group>
+								<field name="color" widget="colorpicker"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_appointments_color_config"
+				model="ir.actions.act_window">
+			<field name="name">Appointments State Colors</field>
+			<field name="res_model">appointment.state.color</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('appointments_config_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('appointments_config_form')})
+                          ]"
+			/>
+		</record>
+		<menuitem name="Scheduler" id="appointment_sched_config_menu"
+				  parent="pragtech_dental_management.medical_conf_menu"
+				  sequence="11"/>
+		<menuitem name="Appointments state colors" id="appointments_color_config_menu"
+				  action="action_appointments_color_config" parent="appointment_sched_config_menu"
+				  sequence="10" />
+
+
+		<record id="break_type_tree" model="ir.ui.view">
+			<field name="name">break_type_tree</field>
+			<field name="model">break.type</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="color" widget="colorpicker"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="break_type_form" model="ir.ui.view">
+			<field name="name">break_type_form</field>
+			<field name="model">break.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" required="True"/>
+							</group>
+							<group>
+								<field name="color" widget="colorpicker"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="break_type_config" model="ir.actions.act_window">
+			<field name="name">Break Type</field>
+			<field name="res_model">break.type</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem name="Break Type" id="appointments_break_type_menu"
+				  action="break_type_config" parent="appointment_sched_config_menu"
+				  sequence="12" />
+	</data>
+</odoo>

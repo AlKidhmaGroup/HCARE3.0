@@ -7,47 +7,47 @@ import odoo.addons.decimal_precision as dp
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    # payment_ids = fields.One2many('account.payment', compute="_compute_payment_ids", string='Payments')
-    # credit_amt = fields.Float('Card Amount', digits=dp.get_precision('Product Price'), compute='_compute_credit_cash_amt')
-    # cash_amt = fields.Float('Cash Amount', digits=dp.get_precision('Product Price'), compute='_compute_credit_cash_amt')
-    #
-    # def _compute_credit_cash_amt(self):
-    #     for invoice in self:
-    #         cash_amt = 0.0
-    #         credit_amt = 0.0
-    #         for statement in invoice.payment_ids:
-    #
-    #             if statement.state in ('posted', 'reconciled'):
-    #                 for inv in statement.invoice_ids:
-    #                     if inv.id == invoice.id:
-    #                         payments_vals = invoice._get_payments_vals()
-    #                         for paymt in payments_vals:
-    #                             payment_id = paymt['account_payment_id']
-    #                             amount = paymt['amount']
-    #                             if payment_id == statement.id:
-    #                                 if statement.journal_id.type == 'cash':
-    #                                     cash_amt += amount
-    #                                 if statement.journal_id.type == 'bank':
-    #                                     credit_amt += amount
-    #
-    #         invoice.credit_amt = credit_amt
-    #         invoice.cash_amt = cash_amt
-    #
-    # @api.one
-    # def _compute_payment_ids(self):
-    #     payments_vals = self._get_payments_vals()
-    #     for paymt in  payments_vals:
-    #         payment_id = paymt['account_payment_id']
-    #         amount = paymt['amount']
-    #         self.env['account.payment'].browse(payment_id).write({'adv_pay_amount': amount})
-    #     self.payment_ids = self.env["account.payment"].search([("invoice_ids", "=", self.id)])
+    payment_ids = fields.One2many('account.payment', compute="_compute_payment_ids", string='Payments')
+    credit_amt = fields.Float('Card Amount', digits=dp.get_precision('Product Price'), compute='_compute_credit_cash_amt')
+    cash_amt = fields.Float('Cash Amount', digits=dp.get_precision('Product Price'), compute='_compute_credit_cash_amt')
+    
+    def _compute_credit_cash_amt(self):
+        for invoice in self:
+            cash_amt = 0.0
+            credit_amt = 0.0
+            for statement in invoice.payment_ids:
+    
+                if statement.state in ('posted', 'reconciled'):
+                    for inv in statement.invoice_ids:
+                        if inv.id == invoice.id:
+                            payments_vals = invoice._get_payments_vals()
+                            for paymt in payments_vals:
+                                payment_id = paymt['account_payment_id']
+                                amount = paymt['amount']
+                                if payment_id == statement.id:
+                                    if statement.journal_id.type == 'cash':
+                                        cash_amt += amount
+                                    if statement.journal_id.type == 'bank':
+                                        credit_amt += amount
+    
+            invoice.credit_amt = credit_amt
+            invoice.cash_amt = cash_amt
+    
+    @api.one
+    def _compute_payment_ids(self):
+        payments_vals = self._get_payments_vals()
+        for paymt in  payments_vals:
+            payment_id = paymt['account_payment_id']
+            amount = paymt['amount']
+            self.env['account.payment'].browse(payment_id).write({'adv_pay_amount': amount})
+        self.payment_ids = self.env["account.payment"].search([("invoice_ids", "=", self.id)])
 
-    # adv_amount = fields.Float(string='Adv Dummy Amount', compute='get_adv_pay_amount')
-    #
-    # @api.one
-    # def get_adv_pay_amount(self):
-    #     self._compute_payment_ids()
-    #     self.adv_amount = 1
+    adv_amount = fields.Float(string='Adv Dummy Amount', compute='get_adv_pay_amount')
+    
+    @api.one
+    def get_adv_pay_amount(self):
+        self._compute_payment_ids()
+        self.adv_amount = 1
 
     @api.multi
     def add_discount(self):
